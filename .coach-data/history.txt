@@ -1,0 +1,3 @@
+basics/02-config-secrets
+advanced/10-production-ready
+intermediate/07-monitoring-basics

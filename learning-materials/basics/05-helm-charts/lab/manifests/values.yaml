@@ -1,0 +1,20 @@
+# TODO: Add configuration values for:
+# - replicaCount
+# - image settings
+# - service configuration
+# - ingress settings
+# - resource limits
+
+replicaCount: 1
+
+image:
+  repository: nginx
+  tag: ""
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false

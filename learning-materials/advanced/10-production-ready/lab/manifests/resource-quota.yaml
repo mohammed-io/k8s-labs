@@ -1,0 +1,10 @@
+# TODO: Create ResourceQuota for namespace limits
+# HINT: Limit requests.cpu, requests.memory, persistentvolumeclaims
+# HINT: Use hard: section with limits
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: compute-resources
+  namespace: production
+spec:
+  # TODO: Add resource limits

@@ -1,0 +1,10 @@
+# TODO: Create LimitRange for default resources
+# HINT: Set default and defaultRequest for containers
+# HINT: Configure CPU and memory defaults
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: default-limits
+  namespace: production
+spec:
+  # TODO: Add limits for Container type

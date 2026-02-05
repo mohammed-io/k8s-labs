@@ -1,0 +1,4 @@
+# TODO: Create deployment with OTEL instrumentation
+# HINT: Add environment variables for OTEL endpoint
+# HINT: OTEL_EXPORTER_OTLP_ENDPOINT: otel-collector:4317
+# HINT: OTEL_SERVICE_NAME: myapp

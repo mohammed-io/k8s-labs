@@ -1,0 +1,13 @@
+# TODO: Create ConfigMap with Grafana dashboard JSON
+# HINT: Add label grafana_dashboard: "1"
+# HINT: Include panels for request rate, errors, latency
+# HINT: Add variables for namespace and pod filtering
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: myapp-dashboard
+  namespace: monitoring
+  labels:
+    grafana_dashboard: "1"
+data:
+  # TODO: Add dashboard.json with Grafana dashboard definition

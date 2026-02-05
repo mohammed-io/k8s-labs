@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-service
+spec:
+  type: ClusterIP
+  # TODO: Add selector to match deployment pods
+  # HINT: selector: app: web
+  # TODO: Add ports configuration
+  # HINT: ports: - port: 80, targetPort: 80

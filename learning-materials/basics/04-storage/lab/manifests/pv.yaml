@@ -1,0 +1,3 @@
+# TODO: Create a PersistentVolume
+# HINT: Set capacity: 1Gi, accessModes: ReadWriteOnce
+# HINT: Use hostPath for testing (not production!)

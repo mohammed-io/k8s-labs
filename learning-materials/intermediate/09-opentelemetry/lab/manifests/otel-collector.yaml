@@ -1,0 +1,11 @@
+# TODO: Create OTEL Collector deployment
+# HINT: Use OpenTelemetry Collector image
+# HINT: Configure receivers (otlp) and exporters (jaeger)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: otel-collector
+  namespace: observability
+spec:
+  # TODO: Add replicas, selector, template
+  # TODO: Add collector container with proper config

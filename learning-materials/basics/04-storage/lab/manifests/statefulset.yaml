@@ -1,0 +1,4 @@
+# TODO: Create a StatefulSet for PostgreSQL
+# HINT: Requires serviceName matching headless service
+# HINT: Add volumeClaimTemplates for data volume
+# HINT: Use postgres:15 image

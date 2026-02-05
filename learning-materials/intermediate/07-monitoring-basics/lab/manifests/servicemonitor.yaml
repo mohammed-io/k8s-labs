@@ -1,0 +1,13 @@
+# TODO: Create ServiceMonitor for Prometheus scraping
+# HINT: Use apiVersion: monitoring.coreos.com/v1
+# HINT: Select pods with app: myapp label
+# HINT: Scrape /metrics endpoint every 30s
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: myapp
+  namespace: monitoring
+spec:
+  # TODO: Add selector
+  endpoints:
+  # TODO: Configure endpoint (port: http, path: /metrics)

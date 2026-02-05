@@ -1,0 +1,4 @@
+# TODO: Create PodDisruptionBudget
+# HINT: Use apiVersion: policy/v1
+# HINT: Set minAvailable: 1
+# HINT: Select app: web pods

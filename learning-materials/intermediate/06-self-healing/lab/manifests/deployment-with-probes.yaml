@@ -1,0 +1,25 @@
+# TODO: Add health probes to the Deployment
+# HINT: Add livenessProbe with httpGet on /
+# HINT: Add readinessProbe with httpGet on /
+# HINT: Set initialDelaySeconds, periodSeconds
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+      - name: web
+        image: nginx:alpine
+        ports:
+        - containerPort: 80
+        # TODO: Add livenessProbe here
+        # TODO: Add readinessProbe here

@@ -1,0 +1,4 @@
+# TODO: Create HorizontalPodAutoscaler
+# HINT: Use apiVersion: autoscaling/v2
+# HINT: Set minReplicas: 2, maxReplicas: 10
+# HINT: Target CPU 80% utilization

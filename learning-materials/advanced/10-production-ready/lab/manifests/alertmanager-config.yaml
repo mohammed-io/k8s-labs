@@ -1,0 +1,10 @@
+# TODO: Create Alertmanager ConfigMap
+# HINT: Configure routes, receivers (pagerduty, slack)
+# HINT: Set group_wait, group_interval, repeat_interval
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: alertmanager-config
+  namespace: monitoring
+data:
+  # TODO: Add alertmanager.yaml configuration

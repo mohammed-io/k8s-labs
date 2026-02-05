@@ -1,0 +1,9 @@
+# TODO: Create a ConfigMap with application config
+# HINT: Use apiVersion: v1, kind: ConfigMap
+# HINT: Add data section with logLevel: info and featureFlag: true
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  # TODO: Add configuration values here
