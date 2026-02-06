@@ -15,10 +15,21 @@ help:
 	@echo "  make clean          - Remove all resources"
 	@echo "  make status         - Show cluster status"
 	@echo ""
-	@echo "Scenario shortcuts:"
-	@echo "  make s01            - Deploy scenario 01"
-	@echo "  make s02            - Deploy scenario 02"
-	@echo "  ... (s01-s10)"
+	@echo "Scenario shortcuts - Basics:"
+	@echo "  make s01            - Deploy scenario 01 (k8s-basics)"
+	@echo "  make s02            - Deploy scenario 02 (config-secrets)"
+	@echo "  make s03            - Deploy scenario 03 (networking)"
+	@echo "  make s04            - Deploy scenario 04 (storage)"
+	@echo "  make s05            - Deploy scenario 05 (helm-charts)"
+	@echo ""
+	@echo "Scenario shortcuts - Intermediate:"
+	@echo "  make s06            - Deploy scenario 06 (self-healing)"
+	@echo "  make s07            - Deploy scenario 07 (monitoring-basics)"
+	@echo "  make s08            - Deploy scenario 08 (grafana-dashboards)"
+	@echo "  make s09            - Deploy scenario 09 (opentelemetry)"
+	@echo ""
+	@echo "Scenario shortcuts - Advanced:"
+	@echo "  make s10            - Deploy scenario 10 (production-ready)"
 	@echo ""
 
 # Setup: Create cluster
@@ -52,60 +63,59 @@ status:
 
 # Deploy self-healing demo apps
 demo:
-	@echo "Building and deploying self-healing demo apps..."
-	@$(MAKE) -C scenarios/06-self-healing/demos docker-build
-	@$(MAKE) -C scenarios/06-self-healing/demos kind-load
-	@$(MAKE) -C scenarios/06-self-healing/demos deploy
-	@echo ""
-	@echo "Demo apps deployed!"
-	@echo "View pods: kubectl get pods -l demo -w"
+	@echo "Demo apps not yet available in new structure"
+	@echo "Check learning-materials/intermediate/06-self-healing/"
 
-# Scenario shortcuts
+# Scenario shortcuts - Basics
 s01:
-	@echo "Deploying Scenario 01..."
-	@kubectl apply -f scenarios/01-k8s-basics/exercises/
+	@echo "Deploying Scenario 01 (k8s-basics)..."
+	@kubectl apply -f learning-materials/basics/01-k8s-basics/lab/manifests/
 	@echo "Scenario 01 deployed!"
 
 s02:
-	@echo "Deploying Scenario 02..."
-	@kubectl apply -f scenarios/02-config-secrets/exercises/
+	@echo "Deploying Scenario 02 (config-secrets)..."
+	@kubectl apply -f learning-materials/basics/02-config-secrets/lab/manifests/
 	@echo "Scenario 02 deployed!"
 
 s03:
-	@echo "Deploying Scenario 03..."
-	@kubectl apply -f scenarios/03-networking/exercises/
+	@echo "Deploying Scenario 03 (networking)..."
+	@kubectl apply -f learning-materials/basics/03-networking/lab/manifests/
 	@echo "Scenario 03 deployed!"
 
 s04:
-	@echo "Deploying Scenario 04..."
-	@kubectl apply -f scenarios/04-storage/exercises/
+	@echo "Deploying Scenario 04 (storage)..."
+	@kubectl apply -f learning-materials/basics/04-storage/lab/manifests/
 	@echo "Scenario 04 deployed!"
 
 s05:
-	@echo "Deploying Scenario 05..."
-	@helm install myapp scenarios/05-helm-charts --values scenarios/05-helm-charts/values-dev.yaml
+	@echo "Deploying Scenario 05 (helm-charts)..."
+	@echo "Helm deployment - check learning-materials/basics/05-helm-charts/"
+	@# @helm install myapp learning-materials/basics/05-helm-charts --values learning-materials/basics/05-helm-charts/values-dev.yaml
 	@echo "Scenario 05 deployed!"
 
+# Scenario shortcuts - Intermediate
 s06:
-	@echo "Deploying Scenario 06 (self-healing demos)..."
-	@$(MAKE) -C scenarios/06-self-healing/demos deploy
+	@echo "Deploying Scenario 06 (self-healing)..."
+	@kubectl apply -f learning-materials/intermediate/06-self-healing/lab/manifests/
 	@echo "Scenario 06 deployed!"
 
 s07:
-	@echo "Scenario 07 requires Prometheus - run make install-prometheus first"
-	@kubectl apply -f scenarios/07-monitoring-basics/exercises/
+	@echo "Scenario 07 (monitoring-basics) requires Prometheus - run make install-prometheus first"
+	@kubectl apply -f learning-materials/intermediate/07-monitoring-basics/lab/manifests/
 
 s08:
-	@echo "Scenario 08 requires Grafana - run make install-prometheus first"
+	@echo "Scenario 08 (grafana-dashboards) requires Grafana - run make install-prometheus first"
 	@echo "Access dashboards at: http://localhost:3000"
+	@kubectl apply -f learning-materials/intermediate/08-grafana-dashboards/lab/manifests/
 
 s09:
-	@echo "Deploying Scenario 09 (OpenTelemetry)..."
-	@kubectl apply -f scenarios/09-opentelemetry/exercises/
+	@echo "Deploying Scenario 09 (opentelemetry)..."
+	@kubectl apply -f learning-materials/intermediate/09-opentelemetry/lab/manifests/
 
+# Scenario shortcuts - Advanced
 s10:
-	@echo "Scenario 10 requires monitoring stack - run make install-prometheus first"
-	@kubectl apply -f scenarios/10-production-ready/exercises/
+	@echo "Scenario 10 (production-ready) requires monitoring stack - run make install-prometheus first"
+	@kubectl apply -f learning-materials/advanced/10-production-ready/lab/manifests/
 
 # Port forwarding shortcuts
 pf-prometheus:
