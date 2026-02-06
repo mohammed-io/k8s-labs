@@ -8,12 +8,22 @@ import frontmatter
 import streamlit as st
 import streamlit.components.v1 as components
 
+from ai_service import get_ai_response
+
 # Set page config (must be first Streamlit command)
 st.set_page_config(
-    page_title="Kubernetes Monitoring Lab",
-    page_icon="☸️",
+    page_title="Learning Coach",
+    page_icon="🎯",
     layout="wide",
 )
+
+# Initialize chat session state
+if "chat_open" not in st.session_state:
+    st.session_state.chat_open = False
+if "chat_messages" not in st.session_state:
+    st.session_state.chat_messages = {}
+if "chat_input_key" not in st.session_state:
+    st.session_state.chat_input_key = 0
 
 # Coach data directory
 COACH_DATA_DIR = Path(__file__).parent / ".coach-data"
@@ -148,6 +158,43 @@ def open_in_dialog(file_path: Path):
     st.markdown(file_path.read_text())
 
 
+@st.dialog("💬 AI Coach", width="medium")
+def open_chat_dialog(problem: ProblemDetail):
+    """Chat dialog for AI assistance with the current problem."""
+
+    # Get or initialize chat history for this problem
+    problem_id = problem.id
+    if problem_id not in st.session_state.chat_messages:
+        st.session_state.chat_messages[problem_id] = []
+
+    messages = st.session_state.chat_messages[problem_id]
+
+    # Display existing chat messages
+    for msg in messages:
+        with st.chat_message(msg["role"]):
+            st.markdown(msg["content"])
+
+    # Chat input
+    if prompt := st.chat_input("Ask about this problem..."):
+        # Add user message
+        messages.append({"role": "user", "content": prompt})
+        st.session_state.chat_messages[problem_id] = messages
+
+        # Display user message
+        with st.chat_message("user"):
+            st.markdown(prompt)
+
+        # Generate AI response using Zhipu AI
+        with st.chat_message("assistant"):
+            with st.spinner("Thinking..."):
+                response = get_ai_response(messages, problem)
+                st.markdown(response)
+
+        # Add assistant response
+        messages.append({"role": "assistant", "content": response})
+        st.session_state.chat_messages[problem_id] = messages
+
+
 class ProblemDetail:
     def __init__(
         self,
@@ -245,7 +292,7 @@ def main():
 
     # Sidebar
     with st.sidebar:
-        st.header("☸️ Kubernetes Monitoring Lab")
+        st.header("🎯 Problem Solving Coach")
 
         category_index = 0
         problem_index = 0
@@ -261,7 +308,7 @@ def main():
             "Category", list(grouped_problems.keys()), index=category_index
         )
         selected = st.selectbox(
-            "Scenario", grouped_problems[category], index=problem_index
+            "Problem", grouped_problems[category], index=problem_index
         )
 
         coach_data.set_current_problem(selected.id)
@@ -287,9 +334,30 @@ def main():
 
         st.markdown("---")
         st.markdown("### Instructions")
-        st.markdown("1. Read the scenario")
+        st.markdown("1. Read the problem")
         st.markdown("2. Think about the questions")
         st.markdown("3. Check `step-01.md` for hints")
+
+    # Floating chat button - use columns layout for positioning
+    problem_id = selected.id
+    message_count = len(st.session_state.chat_messages.get(problem_id, []))
+    has_unread = message_count > 0
+
+    # Create columns for layout - empty left column, button in right column
+    col1, col2 = st.columns([9, 3])
+    with col2:
+        if st.button(
+            "AI Coach",
+            use_container_width=True,
+            key="floating_chat_button",
+            help=f"AI Coach • {message_count} messages" if has_unread else "AI Coach",
+        ):
+            st.session_state.chat_dialog_open = True
+
+    # Handle chat dialog state
+    if st.session_state.get("chat_dialog_open", False):
+        st.session_state.chat_dialog_open = False
+        open_chat_dialog(selected)
 
     render_metadata(selected.metadata)
 
