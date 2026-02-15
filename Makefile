@@ -1,13 +1,15 @@
 # Kubernetes & Monitoring Lab - Makefile
 # Convenience targets for common operations
 
-.PHONY: help setup install-prometheus clean health-check all demo
+.PHONY: help setup install-prometheus clean health-check all demo install run
 
 # Default target
 help:
 	@echo "Kubernetes & Monitoring Lab"
 	@echo ""
 	@echo "Available targets:"
+	@echo "  make install        - Install dependencies with uv"
+	@echo "  make run            - Run Streamlit app"
 	@echo "  make setup          - Create kind cluster"
 	@echo "  make health-check    - Verify environment"
 	@echo "  make install-prometheus - Install monitoring stack"
@@ -31,6 +33,12 @@ help:
 	@echo "Scenario shortcuts - Advanced:"
 	@echo "  make s10            - Deploy scenario 10 (production-ready)"
 	@echo ""
+
+install:
+	uv sync
+
+run:
+	uv run streamlit run main.py
 
 # Setup: Create cluster
 setup:
