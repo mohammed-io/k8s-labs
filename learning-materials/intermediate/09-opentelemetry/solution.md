@@ -78,7 +78,7 @@ data:
 
 ### Access Jaeger UI
 ```bash
-kubectl port-forward svc/jaeger-query 16686:16686 -n observability
+kubectl port-forward deployment/jaeger 16686:16686 -n observability
 # Open http://localhost:16686
 ```
 

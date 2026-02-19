@@ -11,7 +11,7 @@ tools: ["kubectl", "helm", "minikube"]
 
 Learn how to package, configure, and deploy applications with Helm.
 
-## The Problem
+## Scenario
 
 You've been creating individual YAML files for each deployment. Now you need to:
 1. Package your application for reuse across environments

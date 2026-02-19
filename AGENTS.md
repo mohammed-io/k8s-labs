@@ -1,6 +1,6 @@
-# Kubernetes Monitoring Lab - AGENTS.md
+# AGENTS.md
 
-**This file defines the structure and conventions for adding new scenarios to the k8s-monitoring-lab.**
+This file defines the structure and conventions for adding new scenarios to the k8s-monitoring-lab.
 
 ---
 
@@ -35,9 +35,20 @@ k8s-monitoring-lab/
 
 ---
 
-## File Format Specifications
+## Frontmatter Fields
 
-### problem.md (Required)
+| Field | Required | Values |
+|-------|----------|--------|
+| `name` | Yes | string |
+| `category` | Yes | basics, intermediate, advanced |
+| `difficulty` | Yes | beginner, intermediate, advanced |
+| `time` | Yes | "XX minutes" |
+| `concepts` | No | [K8s concept names] |
+| `tools` | No | [Tool names like kubectl, helm, minikube] |
+
+---
+
+## problem.md (Required)
 
 ```yaml
 ---
@@ -86,7 +97,22 @@ Cluster setup commands.
 How to verify the solution.
 ```
 
-### step-*.md (Optional)
+### Required Sections
+
+Every `problem.md` MUST include:
+
+1. **Scenario** - A realistic context (who, what, why)
+2. **Architecture** - ASCII diagram of components
+3. **Requirements** - Numbered list of resources
+4. **Constraints** - Limitations or specific approaches
+5. **Prerequisites** - Skills and tools needed
+6. **What You'll Learn** - Table of concepts
+7. **Getting Started** - Cluster setup commands
+8. **Verification** - How to verify the solution
+
+---
+
+## step-*.md (Optional)
 
 ```markdown
 # Step N: Title
@@ -106,7 +132,26 @@ Specific implementation tasks.
 5 questions with parenthetical answers.
 ```
 
-### solution.md (Required)
+### Quick Check Format
+
+Each step must have exactly 5 questions:
+
+```markdown
+## Quick Check
+
+Test your understanding:
+
+1. What's a Kubernetes Pod? (The smallest deployable unit in Kubernetes, containing one or more containers)
+
+2. What does kubectl apply do? (Applies a configuration to a resource by filename or stdin)
+
+3. What's the difference between Deployment and StatefulSet? (Deployments are stateless, StatefulSets maintain sticky identity for each pod)
+...
+```
+
+---
+
+## solution.md (Required)
 
 ```markdown
 # Solution: Scenario Name
@@ -128,7 +173,18 @@ Commands to verify and test.
 Summary table.
 ```
 
-### lab/ (Required)
+### Requirements
+
+The solution is a reference, not the only path. It MUST:
+
+1. Include **baseline checks** before making changes
+2. Explain **why** each step is needed (not just commands)
+3. Include **verification steps** after each major change
+4. Include **cleanup/reset instructions** for re-running the lab
+
+---
+
+## lab/ (Required)
 
 ```
 lab/
@@ -136,42 +192,6 @@ lab/
 ├── manifests/      # Starter YAML with TODO/HINT comments
 └── verify.sh       # Automated verification
 ```
-
----
-
-## Frontmatter Fields
-
-| Field | Required | Values |
-|-------|----------|--------|
-| `name` | Yes | string |
-| `category` | Yes | basics, intermediate, advanced |
-| `difficulty` | Yes | beginner, intermediate, advanced |
-| `time` | Yes | "XX minutes" |
-| `concepts` | No | [K8s concept names] |
-| `tools` | No | [Tool names like kubectl, helm] |
-
----
-
-## Quick Check Format
-
-Each step must have exactly 5 questions:
-
-```markdown
-## Quick Check
-
-Test your understanding:
-
-1. What's a Kubernetes Pod? (The smallest deployable unit in Kubernetes, containing one or more containers)
-
-2. What does kubectl apply do? (Applies a configuration to a resource by filename or stdin)
-
-3. What's the difference between Deployment and StatefulSet? (Deployments are stateless, StatefulSets maintain sticky identity for each pod)
-...
-```
-
----
-
-## Lab File Guidelines
 
 ### manifests/*.yaml
 

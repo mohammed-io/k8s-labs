@@ -1,0 +1,6 @@
+# TODO: Create a Deployment with 3 replicas
+# HINT: Use apiVersion: apps/v1, kind: Deployment
+# HINT: Set replicas: 3
+# HINT: Use selector with matchLabels: app: web
+# HINT: Pod template labels must match selector: app: web
+# HINT: Use image: nginx:1.25, containerPort: 80

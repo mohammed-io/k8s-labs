@@ -11,7 +11,7 @@ tools: ["kubectl", "helm", "prometheus"]
 
 Learn to monitor Kubernetes applications with Prometheus.
 
-## The Problem
+## Scenario
 
 You need visibility into:
 - Application performance metrics
@@ -44,11 +44,26 @@ Prometheus + ServiceMonitor + Grafana provide the solution.
 3. **Recording Rules**: Pre-compute frequently used queries
 4. **Alerting Rules**: Set up alerts for conditions
 
+## Constraints
+
+- Use Prometheus Operator CRDs (`ServiceMonitor`, `PrometheusRule`) for configuration
+- Keep metric names/labels consistent across examples
+- Ensure monitoring resources are created in expected namespaces
+
 ## Prerequisites
 
 - ✅ Kubernetes basics
 - ✅ Services and networking
 - Helm installed
+
+## What You'll Learn
+
+| Concept | Why It Matters |
+|---------|----------------|
+| **ServiceMonitor** | Enables declarative scrape target discovery |
+| **Recording Rules** | Reduces query cost and dashboard latency |
+| **Alerting Rules** | Detects failures and performance regressions early |
+| **PromQL** | Enables useful operational insights from raw metrics |
 
 ## Getting Started
 
@@ -59,6 +74,14 @@ helm repo update
 
 # Install kube-prometheus-stack
 helm install kube-prometheus prometheus-community/kube-prometheus-stack -n monitoring --create-namespace
+```
+
+## Verification
+
+```bash
+kubectl get servicemonitor -n monitoring
+kubectl get prometheusrule -n monitoring
+kubectl get pods -n monitoring
 ```
 
 ---

@@ -19,5 +19,5 @@ chmod +x verify.sh
 
 Remove resources when done:
 ```bash
-kubectl delete all --all
+kubectl delete -f manifests/ --ignore-not-found=true
 ```

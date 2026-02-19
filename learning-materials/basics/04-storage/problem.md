@@ -11,7 +11,7 @@ tools: ["kubectl", "minikube"]
 
 Learn how to manage persistent storage for stateful applications.
 
-## The Problem
+## Scenario
 
 You need to deploy stateful applications that require persistent data:
 - **PostgreSQL database** - needs persistent storage that survives pod restarts

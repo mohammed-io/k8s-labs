@@ -11,7 +11,7 @@ tools: ["kubectl", "helm", "prometheus", "grafana"]
 
 Learn to build production-grade Kubernetes applications with reliability best practices.
 
-## The Problem
+## Scenario
 
 Production requires:
 - Clear reliability targets (SLOs)
@@ -47,14 +47,43 @@ Production requires:
 3. **Security**: Network policies, RBAC, secrets management
 4. **Backup**: etcd and application backup strategies
 
+## Constraints
+
+- Use namespace-scoped controls first (ResourceQuota, LimitRange, NetworkPolicy)
+- Keep examples declarative and reproducible with manifest files
+- Prefer non-destructive cleanup that only removes lab resources
+
 ## Prerequisites
 
 - ✅ All previous scenarios completed
 - Understanding of Prometheus and Grafana
 
+## What You'll Learn
+
+| Concept | Why It Matters |
+|---------|----------------|
+| **SLI/SLO** | Sets measurable reliability targets |
+| **Alerting** | Detects incidents before SLO burn becomes critical |
+| **Resource Controls** | Prevents noisy neighbors and runaway workloads |
+| **NetworkPolicy** | Reduces lateral movement and attack surface |
+| **Recovery Planning** | Improves resilience and operational readiness |
+
 ## Getting Started
 
 Review your current setup and identify production gaps.
+
+## Verification
+
+Confirm that your namespace contains:
+- A `ResourceQuota` and `LimitRange`
+- A default deny `NetworkPolicy`
+- A valid Alertmanager config object
+
+Use:
+```bash
+kubectl get resourcequota,limitrange,networkpolicy -n production
+kubectl get configmap alertmanager-config -n monitoring
+```
 
 ---
 

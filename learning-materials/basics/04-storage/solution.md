@@ -99,6 +99,17 @@ spec:
 
 ### Step 3: StatefulSet
 
+#### Secret for PostgreSQL
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: postgres-secret
+type: Opaque
+stringData:
+  password: "change-me-in-production"
+```
+
 #### Headless Service
 ```yaml
 apiVersion: v1
@@ -139,7 +150,10 @@ spec:
           name: postgres
         env:
         - name: POSTGRES_PASSWORD
-          value: "example"
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: password
         volumeMounts:
         - name: data
           mountPath: /var/lib/postgresql/data

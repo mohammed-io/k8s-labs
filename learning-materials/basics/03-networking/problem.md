@@ -11,7 +11,7 @@ tools: ["kubectl", "minikube"]
 
 Learn how Kubernetes networking works and how to expose your applications.
 
-## The Problem
+## Scenario
 
 You have multiple microservices that need to communicate:
 - **Frontend** (web app) - needs to reach the API

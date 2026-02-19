@@ -11,7 +11,7 @@ tools: ["kubectl", "helm", "opentelemetry"]
 
 Learn distributed tracing with OpenTelemetry and Jaeger.
 
-## The Problem
+## Scenario
 
 Microservices architectures create complex request flows:
 - A single user request spans multiple services
@@ -49,6 +49,27 @@ Microservices architectures create complex request flows:
 3. **Jaeger**: Trace visualization backend
 4. **Propagation**: Context headers across services
 
+## Constraints
+
+- Use OTLP as the primary ingestion path to the collector
+- Keep collector config explicit (receivers, processors, exporters)
+- Validate trace flow end-to-end from app to backend
+
+## Prerequisites
+
+- Kubernetes cluster with observability namespace access
+- Basic understanding of microservice request flow
+- Helm and kubectl installed
+
+## What You'll Learn
+
+| Concept | Why It Matters |
+|---------|----------------|
+| **Trace/Span Model** | Helps isolate latency and failure hotspots |
+| **Context Propagation** | Preserves request lineage across services |
+| **Collector Pipelines** | Enables centralized telemetry processing |
+| **Backend Visualization** | Turns trace data into actionable debugging workflows |
+
 ## Getting Started
 
 ```bash
@@ -57,6 +78,14 @@ helm install jaeger jaegertracing/jaeger -n observability --create-namespace
 
 # Install OTEL Collector
 helm install opentelemetry-operator open-telemetry/opentelemetry-operator -n observability
+```
+
+## Verification
+
+```bash
+kubectl get deployment otel-collector -n observability
+kubectl get configmap otel-collector-conf -n observability
+kubectl get deployment jaeger -n observability
 ```
 
 ---

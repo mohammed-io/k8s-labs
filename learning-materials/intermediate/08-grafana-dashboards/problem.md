@@ -11,7 +11,7 @@ tools: ["kubectl", "helm", "grafana"]
 
 Learn to create and manage Grafana dashboards for Kubernetes monitoring.
 
-## The Problem
+## Scenario
 
 You have Prometheus collecting metrics, but you need:
 - Visual dashboards for monitoring
@@ -40,6 +40,27 @@ You have Prometheus collecting metrics, but you need:
 3. **Variables**: Add dynamic filters
 4. **Provisioning**: Set up dashboard-as-code
 
+## Constraints
+
+- Dashboard definitions must be version-controlled (ConfigMap-based)
+- Include variable-driven filtering for namespace/pod
+- Keep queries compatible with Prometheus metric labels
+
+## Prerequisites
+
+- Prometheus and Grafana installed (for example via kube-prometheus-stack)
+- Basic PromQL familiarity
+- kubectl access to the monitoring namespace
+
+## What You'll Learn
+
+| Concept | Why It Matters |
+|---------|----------------|
+| **Dashboard Provisioning** | Allows repeatable, code-reviewed dashboards |
+| **Variables** | Enables reusable dashboards across workloads |
+| **Panel Selection** | Balances overview and deep-dive observability |
+| **Query Design** | Prevents misleading or expensive visualizations |
+
 ## Getting Started
 
 ```bash
@@ -50,6 +71,13 @@ helm install kube-prometheus prometheus-community/kube-prometheus-stack -n monit
 kubectl port-forward svc/kube-prometheus-grafana 3000:80 -n monitoring
 
 # Default credentials: admin / prom-operator
+```
+
+## Verification
+
+```bash
+kubectl get configmap myapp-dashboard -n monitoring
+kubectl get configmap myapp-dashboard -n monitoring -o yaml
 ```
 
 ---

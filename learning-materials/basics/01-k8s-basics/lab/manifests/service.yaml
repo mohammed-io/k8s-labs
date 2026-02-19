@@ -1,0 +1,5 @@
+# TODO: Create a Service to expose the deployment
+# HINT: Use apiVersion: v1, kind: Service
+# HINT: Set type: ClusterIP
+# HINT: Use selector: app: web (must match pod labels)
+# HINT: Set port: 80, targetPort: 80

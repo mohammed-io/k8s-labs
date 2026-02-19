@@ -11,7 +11,7 @@ tools: ["kubectl", "minikube"]
 
 Learn how Kubernetes automatically recovers from failures and scales applications.
 
-## The Problem
+## Scenario
 
 Applications encounter failures at multiple levels:
 - Containers crash due to bugs
@@ -40,6 +40,12 @@ Level 5: Service → HPA, VPA, Cluster Autoscaler
 3. **VPA**: Understand vertical pod autoscaling for resource optimization
 4. **PodDisruptionBudget**: Protect application availability during maintenance
 
+## Constraints
+
+- Keep HPA and VPA usage explicit to avoid conflicting autoscaling behavior
+- Use health probes that reflect actual service readiness
+- Validate behavior with kubectl checks rather than assumptions
+
 ## Prerequisites
 
 - ✅ Scenarios 01-05: Kubernetes basics, networking, storage, Helm
@@ -63,6 +69,16 @@ kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/late
 
 # Verify
 kubectl get apiservice v1beta1.metrics.k8s.io
+```
+
+## Verification
+
+Verify that all core resources are present and healthy:
+```bash
+kubectl get deployment web
+kubectl get hpa web-hpa
+kubectl get pdb web-pdb
+kubectl describe deployment web
 ```
 
 ---

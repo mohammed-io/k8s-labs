@@ -1,4 +1,5 @@
 # TODO: Create a simple nginx pod
 # HINT: Use apiVersion: v1, kind: Pod
-# HINT: Add container with image: nginx:alpine
-# HINT: Add name: web container
+# HINT: Add labels: app: nginx
+# HINT: Add container with image: nginx:1.25
+# HINT: Set containerPort: 80
